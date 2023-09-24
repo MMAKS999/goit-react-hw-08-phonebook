@@ -1,8 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
 import { Filter } from './Filter';
 import { PhonebookForm } from './PhonebookForm';
 import { ContactList } from './contactList';
 import Swal from 'sweetalert2';
+
+// Pages
+import Layout from '../components/Layout/Layout';
+import Home from '../pages/Home'
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import Contacts from '../pages/Contacts';
 
 import { useEffect } from 'react';
 
@@ -38,7 +46,7 @@ export const App = () => {
     dispatch(addContact(dataContact));
   };
 
-   const changeFilter = ev => {
+  const changeFilter = ev => {
     dispatch(setFilter(ev.currentTarget.value));
   };
 
@@ -65,16 +73,26 @@ export const App = () => {
 
   return (
     <div>
-      {isLoading && !error && <b>Request in progress...</b>}
+      <Routes>
+        <Route path="/" element={<Layout />} >
+            <Route index element={<Home />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+      </Routes>
       <div>
-        <h1>Phonebook</h1>
-        <PhonebookForm onSubmit={addContactAll} />
-        <h2>Contacts</h2>
-        <Filter value={normalizedFilter} onChange={changeFilter} />
-        <ContactList
-          dataContacts={visibleContacts}
-          onDelateContact={onDelateContact}
-        />
+        {isLoading && !error && <b>Request in progress...</b>}
+        <div>
+          <h1>Phonebook</h1>
+          <PhonebookForm onSubmit={addContactAll} />
+          <h2>Contacts</h2>
+          <Filter value={normalizedFilter} onChange={changeFilter} />
+          <ContactList
+            dataContacts={visibleContacts}
+            onDelateContact={onDelateContact}
+          />
+        </div>
       </div>
     </div>
   );
