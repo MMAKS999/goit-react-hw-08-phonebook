@@ -1,17 +1,16 @@
 import { nanoid } from 'nanoid';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import {
+  Button,
+  Container,
+  Input,
+  Stack,
+  Text,
+} from '@chakra-ui/react/dist/chakra-ui-react.cjs';
 
-const {useState } = require('react');
+const { useState } = require('react');
 
-const Form = styled.form`
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: flex;
-  width: 500px;
-`;
-
-export const PhonebookForm = ({onSubmit}) => {
+export const PhonebookForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -40,36 +39,48 @@ export const PhonebookForm = ({onSubmit}) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <label>
-        Name
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={name}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Number
-        <input
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={number}
-          onChange={handleChange}
-        />
-      </label>
-      <button type="submit">Add contact</button>
-    </Form>
+    <Container boxShadow="base" p="10px" rounded="md" >
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={5}>
+          <label>
+            <Text pl="10px" pb="3px" fontWeight="bold">
+              Name
+            </Text>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Name"
+              pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+              value={name}
+              onChange={handleChange}
+            />
+          </label>
+
+          <label>
+            <Text pl="10px" pb="3px" fontWeight="bold">
+              Number
+            </Text>
+            <Input
+              type="tel"
+              name="number"
+              placeholder="Number"
+              pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+              value={number}
+              onChange={handleChange}
+            />
+          </label>
+          <Button type="submit" colorScheme="teal" variant="outline">
+            Add contact
+          </Button>
+        </Stack>
+      </form>
+    </Container>
   );
 };
-
 
 PhonebookForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

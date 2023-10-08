@@ -1,6 +1,13 @@
+import {
+  Box,
+  Button,
+  Center,
+  Input,
+  Stack,
+  Text,
+} from '@chakra-ui/react/dist/chakra-ui-react.cjs';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/auth-operations';
-import css from '../LoginForm/LoginForm.module.css';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -17,16 +24,37 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}  autoComplete="off">
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <Center>
+      <Box
+        my="200px"
+        maxW="sm"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        boxShadow="dark-lg"
+        p="6"
+        rounded="md"
+      >
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <Stack spacing={3}>
+            <label>
+              <Text pl="10px" pb="3px">
+                Email
+              </Text>
+              <Input type="email" name="email" placeholder="Email" />
+            </label>
+            <label>
+              <Text pl="10px" pb="3px">
+                Password
+              </Text>
+              <Input type="password" name="password" placeholder="Password" />
+            </label>
+            <Button type="submit" colorScheme="teal" variant="outline">
+              Log In
+            </Button>
+          </Stack>
+        </form>
+      </Box>
+    </Center>
   );
 };

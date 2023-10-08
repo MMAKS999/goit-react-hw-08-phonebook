@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-
-
+import { Text } from '@chakra-ui/react';
 // Pages
 import Layout from '../components/Layout/Layout';
 import Home from '../pages/Home';
@@ -22,32 +21,38 @@ export const App = () => {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
-  return isRefreshing ?(<b>refreshing user...</b>) : (
+  return isRefreshing ? (
+    <Text> refreshing user...</Text>
+  ) : (
     <div>
-      
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute redirectTo="/contacts" component={<Register />} />
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute redirectTo="/login" component={<Contacts />} />
-            }
-          />
-        </Route>
-      </Routes>
+      <ChakraProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<Register />}
+                />
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute redirectTo="/login" component={<Contacts />} />
+              }
+            />
+          </Route>
+        </Routes>
+      </ChakraProvider>
     </div>
   );
 };

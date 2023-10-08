@@ -2,8 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 
-
-
 // Components
 import { Filter } from '../components/Filter';
 import { PhonebookForm } from '../components/PhonebookForm';
@@ -15,6 +13,12 @@ import {
   deleteContact,
   fetchContacts,
 } from '../redux/operations/operations';
+import {
+  Box,
+  Center,
+  Heading,
+  Divider,
+} from '@chakra-ui/react/dist/chakra-ui-react.cjs';
 // ******************
 
 export const Contacts = () => {
@@ -73,16 +77,35 @@ export const Contacts = () => {
   return (
     <div>
       {isLoading && !error && <b>Request in progress...</b>}
-      <div>
-        <h1>Phonebook</h1>
-        <PhonebookForm onSubmit={addContactAll} />
-        <h2>Contacts</h2>
-        <Filter value={normalizedFilter} onChange={changeFilter} />
-        <ContactList
-          dataContacts={visibleContacts}
-          onDelateContact={onDelateContact}
-        />
-      </div>
+      <Center>
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          overflow="hidden"
+          boxShadow="dark-lg"
+          p="6"
+          w='70%'
+          mt='25px'
+        >
+          <Center>
+            <Heading as="h2" my="30px" size="lg">
+              Phonebook
+            </Heading>
+          </Center>
+          <PhonebookForm onSubmit={addContactAll} />
+            <Divider p='15px' w='90'/>
+          <Center>
+            <Heading as="h2" my="20px" size="md">
+              Contacts
+            </Heading>
+          </Center>
+          <Filter value={normalizedFilter} onChange={changeFilter} />
+          <ContactList
+            dataContacts={visibleContacts}
+            onDelateContact={onDelateContact}
+          />
+        </Box>
+      </Center>
     </div>
   );
 };

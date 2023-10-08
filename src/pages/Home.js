@@ -1,26 +1,30 @@
-const styles = {
-  container: {
-    minHeight: 'calc(100vh - 50px)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: 'center',
-  },
-};
+import {
+  Button,
+  Center,
+  Container,
+  Heading,
+  Text,
+} from '@chakra-ui/react/dist/chakra-ui-react.cjs';
+import { NavLink } from 'react-router-dom';
 
 export default function Home() {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>
-        &#x1F5F9; Phone book welcome page{' '}
-        <span role="img" aria-label="Greeting icon">
-          &#9742;
-        </span>
-      </h1>
-    </div>
+    <Container as="section" maxWidth="4xl" pt="200px">
+      <Center>
+        <NavLink to="/register">
+          <Button boxShadow="dark-lg" p="6" rounded="md" >
+            <Heading my="30px" color="blue.300">
+              <Text>
+                {' '}
+                &#x1F5F9; Phone book welcome page
+                <span role="img" aria-label="Greeting icon">
+                  &#9742;{' '}
+                </span>
+              </Text>
+            </Heading>
+          </Button>
+        </NavLink>
+      </Center>
+    </Container>
   );
 }
