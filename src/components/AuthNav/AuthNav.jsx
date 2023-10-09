@@ -7,14 +7,12 @@ export const AuthNav = () => {
   return (
     <>
       <NavLink to="/register">
-        <Tab>Register</Tab>
+        <Tab >Register</Tab>
       </NavLink>
 
       <NavLink to="/login">
         <Tab>Log In</Tab>
       </NavLink>
-
-    
     </>
   );
 };

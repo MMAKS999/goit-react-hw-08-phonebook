@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react/dist/chakra-ui-react.cjs';
 // ******************
 
-export const Contacts = () => {
+export default function Contacts() {
   const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
 
@@ -84,8 +84,8 @@ export const Contacts = () => {
           overflow="hidden"
           boxShadow="dark-lg"
           p="6"
-          w='70%'
-          mt='25px'
+          w="70%"
+          mt="25px"
         >
           <Center>
             <Heading as="h2" my="30px" size="lg">
@@ -93,7 +93,7 @@ export const Contacts = () => {
             </Heading>
           </Center>
           <PhonebookForm onSubmit={addContactAll} />
-            <Divider p='15px' w='90'/>
+          <Divider p="15px" w="90" />
           <Center>
             <Heading as="h2" my="20px" size="md">
               Contacts
@@ -108,4 +108,4 @@ export const Contacts = () => {
       </Center>
     </div>
   );
-};
+}
